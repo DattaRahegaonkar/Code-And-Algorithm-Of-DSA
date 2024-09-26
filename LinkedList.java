@@ -1,6 +1,7 @@
+import java.util.LinkedList;
 import org.w3c.dom.Node;
 
-public class LinkedList {
+public class linkedList {
 
     public static class node {
         int data;
@@ -303,20 +304,105 @@ public class LinkedList {
 
     }
 
-    
+    public static void JavaCollectionFramework(){
 
+        // creation of linked list
+        LinkedList<Integer> ll = new LinkedList<>();
+
+        //adding of elements
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addFirst(0);
+
+        // print
+        System.out.println(ll);
+
+        // remove
+        ll.removeLast();
+        ll.removeFirst();
+        System.out.println(ll);
+
+    }
+
+    private node getnode(node head) {
+        node slow = head;
+        node fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    private node Merge(node h1, node h2) {
+        node MergeLL = new node(-1);
+        node temp = MergeLL;
+
+        while (h1 != null && h2!= null) {
+            if(h1.data <= h2.data) {
+                temp.next = h1;
+                h1 = h1.next;
+                temp = temp.next;
+            } else {
+                temp.next = h1;
+                h2 = h2.next;
+                temp = temp.next;
+            }           
+        }
+
+        while (h1 != null) {
+            temp.next = h1;
+            h1 = h1.next;
+            temp = temp.next;            
+        }
+
+        while (h2 != null) {
+            temp.next = h2;
+            h2 = h2.next;
+            temp = temp.next;
+        }
+
+        return MergeLL.next;
+    }
+
+    public node MergeSort(node head) {
+
+        if(head != null || head == null) {
+            return head;
+        }
+
+        // find midnode
+        node midnode = getnode(head);
+
+        // break in two parts
+        node rightnode = midnode.next;
+        midnode.next = null;
+
+        node newleft = MergeSort(head);
+        node newright = MergeSort(rightnode);
+
+        return Merge(newleft, newright);
+
+        }
 
     public static void main(String[] args) {
 
-        LinkedList ll = new LinkedList();
+        linkedList ll = new linkedList();
         
         // ascending order linked list
         System.out.print("Linked List : ");
         ll.addFirst(2);
         ll.addFirst(1);
-        ll.addLast(4);
         ll.addLast(5);
+        ll.addLast(4);
         ll.add(2, 3);
+        ll.printLinkedList();
+
+        //MergeSort
+        ll.head = ll.MergeSort(ll.head);
+        ll.printLinkedList();
 
         // palindrome linked list
         // System.out.print("Linked List : ");
@@ -338,7 +424,7 @@ public class LinkedList {
 
 
 
-        ll.printLinkedList();
+        // ll.printLinkedList();
 
         // ll.removeFirst();
         // ll.printLinkedList();
@@ -346,9 +432,11 @@ public class LinkedList {
         // ll.removeLast();
         // ll.printLinkedList();
 
+        // Search iterative
         // System.out.println(ll.itrSearch(2));
         // System.out.println(ll.itrSearch(6 ));
 
+        // Search Recursive
         // System.out.println(ll.RecSearch(2));
         // System.out.println(ll.RecSearch(6 ));
 
@@ -362,7 +450,11 @@ public class LinkedList {
         // ll.reverse();
         // ll.printLinkedList();
 
-        // System.out.println(ll.CheackPalindrome());
+        // System.out.println(ll.CheackPalindrome());/
+
+
+
+        // JavaCollectionFramework();
 
         
     }

@@ -41,11 +41,11 @@ public class DivideAndConquer {
             k++;
         }
 
-        while ( i <= mid) {
-            temp[k++] = arr[i++];
+        while ( i <= mid) {   // left side remaining elements
+            temp[k++] = arr[i++];  
         }
 
-        while ( j <= ei) {
+        while ( j <= ei) {    // right side remaining elements
             temp[k++] = arr[j++];
         }
 
@@ -91,7 +91,7 @@ public class DivideAndConquer {
 
     public static void main(String[] args) {
 
-        int arr[] = {7,6,10,5,9,2,1,15,7};
+        int arr[] = {7,6,10,5,9,2,1,3};
         MerageSort(arr, 0, arr.length-1);
         printarr(arr);
 
