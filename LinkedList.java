@@ -385,7 +385,51 @@ public class linkedList {
 
         return Merge(newleft, newright);
 
+    }
+
+    public void zigzag() {
+
+        // find mid
+        node slow = head;
+        node fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
+
+        node midnode = slow;
+
+        // reverse the 2nd half
+        node prev = null;
+        node curr = midnode.next;
+        midnode.next = null;
+        node next;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;                        
+        }
+        
+        // alternate merging
+        node left = head;
+        node right = prev;
+
+        node nextleft, nextright;
+        
+        while (left != null && right != null) {
+            nextleft = left.next;
+            left.next = right;
+            nextright = right.next;
+            right.next = nextleft;
+
+            left = nextleft;
+            right = nextright;
+        }
+
+    }
 
     public static void main(String[] args) {
 
@@ -401,8 +445,12 @@ public class linkedList {
         ll.printLinkedList();
 
         //MergeSort
-        ll.head = ll.MergeSort(ll.head);
-        ll.printLinkedList();
+        // ll.head = ll.MergeSort(ll.head);
+        // ll.printLinkedList();
+
+        //Zig zag
+        // ll.zigzag();
+        // ll.printLinkedList();
 
         // palindrome linked list
         // System.out.print("Linked List : ");
@@ -422,10 +470,6 @@ public class linkedList {
         // RemoveCycle();
         // System.out.println(isCycle());
 
-
-
-        // ll.printLinkedList();
-
         // ll.removeFirst();
         // ll.printLinkedList();
 
@@ -440,22 +484,15 @@ public class linkedList {
         // System.out.println(ll.RecSearch(2));
         // System.out.println(ll.RecSearch(6 ));
 
-        // System.out.println(ll.size);
-
-        // System.out.println(ll.size());
-
         // ll.deleteNthNodeFromEnd(3);
         // ll.printLinkedList();
 
         // ll.reverse();
         // ll.printLinkedList();
 
-        // System.out.println(ll.CheackPalindrome());/
-
-
+        // System.out.println(ll.CheackPalindrome());
 
         // JavaCollectionFramework();
-
         
     }
 }
