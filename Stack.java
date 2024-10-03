@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class Stack {
     
-    static class StackUsingArrayList {                             // stack using arraylist
+    static class StackUsingArrayList {
+
         static ArrayList<Integer> list = new ArrayList<>();
         
+        // empty
         public static boolean isEmpty() {
             return list.size() == 0;
         }
@@ -31,9 +33,10 @@ public class Stack {
             }
             return list.get(list.size()-1);
         }
+    
     }
 
-    
+
     static class  node {
         int data;
         node next;
@@ -43,10 +46,12 @@ public class Stack {
             this.next = null;
         }        
     }
+
     static class StackUsingLinkedList {
 
         static node head = null;
 
+        // empty
         public static boolean isEmpty() {
             return head == null;
         }
@@ -57,7 +62,7 @@ public class Stack {
 
             if (isEmpty()) {
                 head = newnode;
-                return;                
+                return;
             }
 
             newnode.next = head;
@@ -105,5 +110,6 @@ public class Stack {
         //     sl.pop();            
         // }
 
+        
     }
 }
