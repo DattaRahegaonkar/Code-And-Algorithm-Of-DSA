@@ -91,66 +91,40 @@ public class arrayList {
     public static void main(String args[]) {
 
         // Question 1  // Store max water in a container
-        // ArrayList<Integer> height = new ArrayList<>();
-        // height.add(1);
-        // height.add(8);
-        // height.add(6);
-        // height.add(2);
-        // height.add(5);
-        // height.add(4);
-        // height.add(8);
-        // height.add(3);
-        // height.add(7);
-        // System.out.println(storewater(height));
-        // System.out.println(Storewater(height));
+        ArrayList<Integer> height = new ArrayList<>();
+        height.add(1);
+        height.add(8);
+        height.add(6);
+        height.add(2);
+        height.add(5);
+        height.add(4);
+        height.add(8);
+        height.add(3);
+        height.add(7);
+        System.out.println(storewater(height));
+        System.out.println(Storewater(height));
 
         // Question 2 // Pair sum 
-        // ArrayList<Integer> sortedlist = new ArrayList<>();
-        // sortedlist.add(1);
-        // sortedlist.add(2);
-        // sortedlist.add(3);
-        // sortedlist.add(4);
-        // sortedlist.add(5);
-        // sortedlist.add(6);
-        // System.out.println(pairsum(sortedlist));
-        // System.out.println(Pairsum(sortedlist));
+        ArrayList<Integer> sortedlist = new ArrayList<>();
+        sortedlist.add(1);
+        sortedlist.add(2);
+        sortedlist.add(3);
+        sortedlist.add(4);
+        sortedlist.add(5);
+        sortedlist.add(6);
+        System.out.println(pairsum(sortedlist));
+        System.out.println(Pairsum(sortedlist));
 
         // Question 3 // pair sum in rotated and sorted arratlist
-        // ArrayList<Integer> Rotatedlist = new ArrayList<>();
-        // Rotatedlist.add(11);
-        // Rotatedlist.add(15);
-        // Rotatedlist.add(6);
-        // Rotatedlist.add(7);
-        // Rotatedlist.add(8);
-        // Rotatedlist.add(9);
-        // Rotatedlist.add(10);
-        // System.out.println(RotatedPairsum(Rotatedlist));
-
-        // ArrayList
-
-        ArrayList<Integer> list = new ArrayList<>();
-        // add elemet
-        list.add(1);
-        list.add(2);
-        list.add(10);
-        list.add(3);
-        list.add(4);
-        list.add(5);
-     
-        // get element
-        // list.get(2);
-
-        // //remove element
-        // list.remove(4);
-
-        // //set element
-        // list.set(1,10);
-
-        // //contains element
-        // list.contains(3);
-
-        // //size of Arraylist
-        // list.size();
+        ArrayList<Integer> Rotatedlist = new ArrayList<>();
+        Rotatedlist.add(11);
+        Rotatedlist.add(15);
+        Rotatedlist.add(6);
+        Rotatedlist.add(7);
+        Rotatedlist.add(8);
+        Rotatedlist.add(9);
+        Rotatedlist.add(10);
+        System.out.println(RotatedPairsum(Rotatedlist));
 
         // // max element
         // int max = Integer.MIN_VALUE;

@@ -51,6 +51,7 @@ public class ExamplesOfArray {
         
         //Trapping rain water
         // int h[] = {4,2,0,6,3,2,5};
+        // int h[] = {7,0,4,2,5,0,6,4,0,5};
         // int width = 1;
         // Trapping_RainWater(h,width);
 
