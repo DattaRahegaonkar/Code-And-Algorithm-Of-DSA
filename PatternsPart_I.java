@@ -7,7 +7,7 @@ public class PatternsPart_I {
         // solid four star squareS
         // for(int lines=0; lines<4; lines++) {
         //     for(int star=0; star<4; star++) {
-        //         System.err.print("*");
+        //         System.out.print("*");
         //     }
         //     System.out.println();
         // }
@@ -60,16 +60,53 @@ public class PatternsPart_I {
         //     System.out.println();
         // }
 
-        System.out.print("Enter the number : ");
-        int rows = scn.nextInt();
-        int cols = scn.nextInt();
+        // System.out.print("Enter the number : ");
+        // int rows = scn.nextInt();
+        // int cols = scn.nextInt();
 
-        for(int i=1; i<=rows; i++) {
-            for(int j=1; j<=cols; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
-        }
+        // for(int i=1; i<=rows; i++) {
+        //     for(int j=1; j<=cols; j++) {
+        //         System.out.print("*");
+        //     }
+        //     System.out.println();
+        // }
+
+
+        // for (int i = 1; i <= 5; i++) {
+        //     for (int j = 1; j <= i; j++) {
+        //         System.out.print("*");
+        //     }
+        //     System.out.println();
+        // }
+        // for (int i = 5; i >= 1; i--) {
+        //     for (int j = 1; j <= i; j++) {
+        //         System.out.print("*");
+        //     }
+        //     System.out.println();
+        // }
+
+        // for (int i = 1; i <= 10; i++) {
+        //     if (i % 2 == 0) {
+        //         for (int j = 1; j <= i; j++) {
+        //             if (j % 2 == 0) {
+        //                 System.out.print("1");
+        //             } else {
+        //                 System.out.print("0");
+        //             }
+        //         }
+        //         System.out.println();
+        //     } else {
+        //         for (int j = 1; j <= i; j++) {
+        //             if (j % 2 == 0) {
+        //                 System.out.print("0");
+        //             } else {
+        //                 System.out.print("1");
+        //             }
+        //         }
+        //         System.out.println();
+        //     }
+        // }
+
 
     }
     

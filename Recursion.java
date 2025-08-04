@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Recursion {
 
     public static void DecreseOrder(int n) {
@@ -19,12 +21,53 @@ public class Recursion {
     }
 
     public static int Factorial(int n) { // time complexity O(n) and Space complexity O(n) because variable creation at every recursion
-        int result = 0;
+        int result = 0; 
         if( n == 0){
             return 1;
         }
         int num = Factorial(n-1);
         return result = n * num;
+    }
+
+    public static void ReverseAnArray(int i, int arr[]) {
+
+        if (i == (arr.length/2)) {
+            return;
+        }
+
+        int temp = arr[i];
+        arr[i] = arr[arr.length-1-i];
+        arr[arr.length-1-i] = temp;
+
+        ReverseAnArray(i+1, arr);
+    }
+
+    public static void Palindrome(int i, String str) {
+
+        if (i > (str.length()/2)) {
+            System.out.println(true);
+            return;
+        }
+
+        if (str.charAt(i) == str.charAt(str.length()-1-i)) {
+            Palindrome(i+1, str);
+        } else {
+            System.out.println(false);
+            return;
+        }
+
+        // in Other Way
+
+        // if (i > (str.length()/2)) {
+        //     return true;
+        // }
+
+        // if (str.charAt(i) != str.charAt(str.length()-1-i)) {
+        //     return false;            
+        // }
+
+        // return Palindrome(i+1, str);
+
     }
 
     public static int Sum(int n) {  // time complexity O(n) and Space complexity O(n) because variable creation at every recursion
@@ -180,7 +223,37 @@ public class Recursion {
         }
         SubString(S, i+1, count);
     }
-        
+       
+    public static void SubsetsInArray(int ind, ArrayList<Integer> list, int arr[]) {
+
+        if (ind == arr.length) {
+            System.out.println(list);
+            return;
+        }
+
+        list.add(arr[ind]);
+        SubsetsInArray(ind+1, list, arr);
+        list.remove(list.size()-1);
+        SubsetsInArray(ind+1, list, arr);
+
+    }
+    
+    public static void SubsetOfSumK(int ind, int arr[], ArrayList<Integer> list, int sum, int k) {
+        if (ind == arr.length) {
+            if (sum == k) {
+                System.out.println(list);           
+            }
+            return;
+        }
+
+        list.add(arr[ind]);
+        sum += arr[ind];
+        SubsetOfSumK(ind+1, arr, list, sum, k);
+        list.remove(list.size()-1);
+        sum -= arr[ind];
+        SubsetOfSumK(ind+1, arr, list, sum, k);
+    }
+
     public static void Shifting(int n, String src, String help, String destination){
 
         if(n == 0){
@@ -208,12 +281,29 @@ public class Recursion {
 
 
     public static void main(String[] args) {
-        int n = 10;
+
+        ArrayList<Integer> list = new ArrayList<Integer>();
+
+        int arr[] = {1,2,1};
+
+
+        SubsetOfSumK(0, arr, list, 0, 2);
+
+        // int n = 10;
         // DecreseOrder(n);
         // IncreseOrder(n);
 
         // int result = Factorial(n);
         // System.err.println(result);
+
+        // int arr[] = {1,4,3,6,2};
+        // ReverseAnArray(0, arr);
+        // for (int i = 0; i < arr.length; i++) {
+        //     System.out.print(arr[i] + " ");
+        // }
+
+        // String str = "madam";
+        // Palindrome(0, str);
 
         // int result = Sum(n);
         // System.out.println(result);
@@ -242,6 +332,7 @@ public class Recursion {
         // RemoveDuplicate(str, 0, newstr, map);
 
         // System.out.println(FriendsPairing(5));
+        // System.out.println();
 
         // int arr[] = {3,2,4,5,6,2,7,2,2};
         // int key = 2;
@@ -260,6 +351,9 @@ public class Recursion {
         // int n = 3;
         // Shifting(n, src, help, destination);
 
+        // ArrayList<Integer> list = new ArrayList<>();
+        // int arr[] = {3,1,2};
+        // SubsetsInArray(0, list, arr);
 
         // String str = "abcd";
         // ReverseString(str, str.length()-1);

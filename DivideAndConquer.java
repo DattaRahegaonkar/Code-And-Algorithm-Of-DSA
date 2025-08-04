@@ -8,7 +8,7 @@ public class DivideAndConquer {
 
 // Merge Sort
 
-    public static void MerageSort(int arr[], int si, int ei){
+    public static void DivedeAndSort(int arr[], int si, int ei){
 
         if(si >= ei) {
             return;
@@ -16,14 +16,14 @@ public class DivideAndConquer {
 
         //operations
         int mid = si + (ei - si)/2;
-        MerageSort(arr, si, mid); // left part
-        MerageSort(arr, mid+1, ei); //right part
+        DivedeAndSort(arr, si, mid); // left part
+        DivedeAndSort(arr, mid+1, ei); //right part
 
-        merge(arr, si, mid, ei); // merging left and rigth part
+        Merge(arr, si, mid, ei); // merging left and rigth part
 
     }
 
-    public static void merge(int arr[], int si, int mid, int ei) {
+    public static void Merge(int arr[], int si, int mid, int ei) {
 
         int temp[] = new int[ei-si+1];
         int i = si; // index for 1st sorted part
@@ -92,7 +92,7 @@ public class DivideAndConquer {
     public static void main(String[] args) {
 
         int arr[] = {7,6,10,5,9,2,1,3};
-        MerageSort(arr, 0, arr.length-1);
+        DivedeAndSort(arr, 0, arr.length-1);
         printarr(arr);
 
         // int arr[] = {7,6,10,5,9,2,1,15,7};

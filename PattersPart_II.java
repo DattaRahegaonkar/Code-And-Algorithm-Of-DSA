@@ -32,6 +32,23 @@ public class PattersPart_II {
         }
     }
 
+    public static void newsturcture(int rows, int Cols) {
+
+        for (int i = 1; i <= rows; i++) {
+
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");            
+            }
+
+            // for (int j = i; j >= 1; j--) {
+            //     System.out.print("*");
+            // }
+
+            System.out.println();
+        }
+
+    }
+
     public static void InvertedHalfPyramidWithNumber(int Rows) {
         for(int i=0; i<=Rows; i++) {
             for(int j=1; j<=Rows-i; j++){
@@ -210,7 +227,11 @@ public class PattersPart_II {
             System.out.println();
         }
     }
+
+
     public static void main(String[] args) {
+
+        newsturcture(4, 8);
 
         // HollowRectangle(4,4);
         // InvertedRotatedHalfPyramid(4);
@@ -224,5 +245,7 @@ public class PattersPart_II {
         // Diamond(5);
         // NumberPyramid(5);
         // PalindromicPatternWithNumber(5);
+
+
     }
 }
