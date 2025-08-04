@@ -100,18 +100,44 @@ public class Array {
         System.out.println("Smallest number : "+ SmallestNumber);
     }
     
-    public static void PrintSubArray(int arr[]) {
+    public static void SecondLargestNumber(int arr[]){
+
+        int s_largest = Integer.MIN_VALUE;
+        int largest = Integer.MIN_VALUE;
+
+        for(int i=0; i<arr.length; i++) {
+            if(arr[i] > largest) {
+                s_largest = largest;
+                largest = arr[i];
+            } else if(arr[i] > s_largest && arr[i] != largest) {
+                s_largest = arr[i];
+            }
+        }
+
+        System.out.println("Second largest number : " + s_largest);
+        System.out.println("largest number : " + largest);
+
+    }
+
+    public static void PrintSubArrays(int arr[]) {           // ( Brute Force Approch ) time complexity is O(n^3) -- Bad
         int totalsubarray = 0;
+        int maxsum = Integer.MIN_VALUE;
         for(int i=0; i<arr.length; i++) {
             for(int j=i; j<arr.length; j++) {
+                int sum = 0;
                 for(int k=i; k<=j; k++) {
                     System.out.print(arr[k] + " ");
+                    sum += arr[k];
+                }
+                if(maxsum < sum) {
+                    maxsum = sum;
                 }
                 totalsubarray++;
                 System.out.println();
             }
             System.out.println();
         }
+        System.out.println("max sum of the sub array is = " + maxsum);
         System.out.println("totalsubarray : " + totalsubarray);
     }
     
@@ -194,6 +220,188 @@ public class Array {
         System.out.println("max sum of sub array = " + maxsum);
     }
     
+    public static void RemoveDuplicatesInSortedArray(int arr[]) {
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(arr[0]);
+        for(int i=1; i<arr.length; i++) {
+
+            if(arr[i] != arr[i-1]) {
+                list.add(arr[i]);
+            }
+        }
+
+        for(int i=0; i<list.size(); i++) {
+            arr[i] = list.get(i);
+        }
+
+        for(int i=0; i<list.size(); i++) {
+            System.out.print(arr[i] + " " );
+        }
+    }
+
+    public static void RotateArrayByOnePlace(int arr[]) {
+        int temp = arr[arr.length-1];
+        for(int i=arr.length-1; i>0; i--) {
+            arr[i] = arr[i-1];
+        }
+        arr[0] = temp;
+
+        for(int i=0; i<arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public static void reverse(int arr[], int start, int end) {
+        while(start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void RotateArrayByDPlaces(int arr[], int d) {
+
+        int n = arr.length;
+        d = d % n; // to handle cases where d >= n
+
+        reverse(arr, 0, d - 1); // Reverse first d elements
+        reverse(arr, d, n - 1); // Reverse remaining n-d elements
+        reverse(arr, 0, n - 1); // Reverse the entire array 
+        
+        for(int i=0; i<arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+
+    }
+
+    public static int LowerBoundUSingBinarySearch(int arr[], int target) {
+        int start = 0;
+        int end = arr.length - 1;
+        int LP = arr.length; // Default answer if target is not found
+
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+
+            if(arr[mid] >= target) {
+                LP = mid;
+                end = mid - 1; // continue searching in the left half
+            }  else {
+                start = mid + 1;
+            }
+        }
+
+        // System.out.println("Lower bound index of " + target + " is: " + LP);
+
+        return LP;
+    }
+
+    public static int UpperBoundUSingBinarySearch(int arr[], int target) {
+        int start = 0;
+        int end = arr.length - 1;
+        int UP = arr.length; // Default answer if target is not found
+
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+
+            if(arr[mid] > target) {
+                UP = mid;
+                end = mid - 1; // continue searching in the left half
+            }  else {
+                start = mid + 1;
+            }
+        }
+
+        // System.out.println("Upper bound index of " + target + " is: " + UP);
+
+        return UP;
+    }
+
+    public static void CorrectPostionToInsertElement(int arr[], int element) {
+
+        int start = 0;
+        int end = arr.length - 1;        
+        int index = arr.length;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (arr[mid] >= element) {
+                index = mid; // Found a position where element can be inserted
+                end = mid - 1; // Continue searching in the left half
+            } else {
+                start = mid + 1; // Continue searching in the right half
+            }
+            
+        }
+
+        System.out.println("Correct position to insert element " + element + " is at index: " + index);
+
+    }
+
+    public static void FirstLastOccuranceUsingLPAndUP(int arr[], int target){
+        
+        int first = -1;
+        int last = -1;
+
+        first = LowerBoundUSingBinarySearch(arr, target);
+        last = UpperBoundUSingBinarySearch(arr, target) - 1; // Adjust last index to be inclusive
+
+        if (first >= arr.length || arr[first] != target) {
+            first = -1;
+            last = -1;
+        }
+
+        System.out.println("pair of first and last occurrence of " + target + " is : (" + first + "," + last + ")");
+    }
+
+    public static void FirstLastOccurance(int arr[], int target) {
+
+        int first = -1;
+        int last = -1;
+
+        // Finding first occurrence
+        int start = 0;
+        int end = arr.length - 1;
+        while (start <= end) {
+
+            int mid = start + (end - start) / 2;
+
+            if (arr[mid] == target) {
+                first = mid; // Found a potential first occurrence
+                end = mid - 1; // Continue searching in the left half
+            } else if (arr[mid] < target) {
+                start = mid + 1; // Continue searching in the right half
+            } else {
+                end = mid - 1; // Continue searching in the left half
+            }
+        }
+
+        // Finding last occurrence
+        start = 0;
+        end = arr.length - 1;
+        while (start <= end) {
+
+            int mid = start + (end - start) / 2;
+
+            if (arr[mid] == target) {
+                last = mid; // Found a potential last occurrence
+                start = mid + 1; // Continue searching in the right half
+            } else if (arr[mid] < target) {
+                start = mid + 1; // Continue searching in the right half
+            } else {
+                end = mid - 1; // Continue searching in the left half
+            }
+        }
+
+        System.out.println("pair of first and last occurrence of " + target + " is : (" + first + "," + last + ")");
+    }
+
+
+
+
     public static int SortedRotedArray(int arr[], int target, int start, int end){
 
         while (start <= end) {
@@ -266,6 +474,10 @@ public class Array {
         // int arr[] = {1,2,6,3,5};
         // LargestNumber(arr);
 
+        // Second largest number
+        // int arr[] = {1,2,6,3,5};
+        // SecondLargestNumber(arr);
+
         //binary search
         // int arr[] = {1,-2,6,-1,3};
         // int key = 12;
@@ -289,7 +501,7 @@ public class Array {
 
         //Print SubArray
         // int arr[] = {1,-2,6,-1,3};
-        // PrintSubArray(arr);
+        // PrintSubArrays(arr);
 
         //Max Sum Of SubArray 1
         // int arr[] = {1,-2,6,-1,3};
@@ -304,6 +516,36 @@ public class Array {
         // KadanesAlgorithamForMaxSumOfSubArray(arr);
         // KadanesAlgorithamForMaxSumOfSubArrayWithSubArray(arr);
     
+        //Remove Duplicates In Sorted Array
+        // int arr[] = {1,1,2,2,3,3,4,4,5,5};
+        // RemoveDuplicatesInSortedArray(arr);
+
+        // Rotate Array By One Place
+        // int arr[] = {1,2,3,4,5};
+        // RotateArrayByOnePlace(arr);
+
+        // Rotate Array By D Places
+        // int arr[] = {1,2,3,4,5};
+        // int d = 2; // number of places to rotate
+        // RotateArrayByDPlaces(arr, d);
+
+        // Lower Bound Using Binary Search
+        // int arr[] = {1,3,6,9,12,15,18,21,24,27,30};
+        // int target = 13;
+        // LowerBoundUSingBinarySearch(arr, target);
+
+        // Correct Position To Insert Element
+        // int arr[] = {1,3,6,9,12,15,18,21,24,27,30};
+        // int element = 20;
+        // CorrectPostionToInsertElement(arr, element);
+
+        // First and Last Occurrence
+        // int arr[] = {2,4,6,8,8,8,11,13};
+        // int target = 13;
+        // FirstLastOccuranceUsingLPAndUP(arr, target);
+        // FirstLastOccurance(arr, target);
+
+
         //remove element in array
         // int arr[] = {7,8,3,4,15,13,4,1};
         // removeElementInArray(arr);
