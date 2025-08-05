@@ -357,7 +357,7 @@ public class Array {
         System.out.println("pair of first and last occurrence of " + target + " is : (" + first + "," + last + ")");
     }
 
-    public static void FirstLastOccurance(int arr[], int target) {
+    public static void FirstLastOccurance(int arr[], int target) {  // log(n) time complexity
 
         int first = -1;
         int last = -1;
@@ -399,10 +399,10 @@ public class Array {
         System.out.println("pair of first and last occurrence of " + target + " is : (" + first + "," + last + ")");
     }
 
+    public static int SearchElementInSortedRotedArray(int arr[], int target){  // log(n) time complexity
 
-
-
-    public static int SortedRotedArray(int arr[], int target, int start, int end){
+        int start = 0;
+        int end = arr.length - 1;
 
         while (start <= end) {
 
@@ -431,6 +431,8 @@ public class Array {
 
     }
     
+    
+
     public static void removeElementInArray(int arr[]){
 
         Arrays.sort(arr);
@@ -458,10 +460,6 @@ public class Array {
     public static void main(String[] args) {
 
         Scanner scn = new Scanner(System.in);
-
-        // sorted roted array
-        // int arr[] = {4,5,6,7,0,1,2};
-        // System.out.println(SortedRotedArray(arr, 0, 0, arr.length-1));
         
         //linear search
         // int arr[] = {2,4,6,8,10,12,14,16};
@@ -545,6 +543,9 @@ public class Array {
         // FirstLastOccuranceUsingLPAndUP(arr, target);
         // FirstLastOccurance(arr, target);
 
+        // Search Element in Sorted Rotated Array
+        // int arr[] = {4,5,6,7,0,1,2};
+        // System.out.println(SearchElementInSortedRotedArray(arr, 0));
 
         //remove element in array
         // int arr[] = {7,8,3,4,15,13,4,1};
