@@ -115,66 +115,113 @@ public class Arrays_2D {
         System.out.println(sum);
     } 
 
-    public static void searching_in_sorted_matrix(int matrix[][]){
+    public static void RowWithMaxNoOf1sInSortedArray(int matrix[][]) {   // time complexity is O( rows * cols )
+        int count_ones = 0;
+        int row_index = 0;
+        int max_ones = 0;
 
-        int key = 5;
-
-        // for(int i=0; i<matrix[0].length; i++){
-        //     for(int j=0; j<matrix.length; j++){
-        //         if(matrix[i][j] == key){
-        //             System.out.println("key found");
-        //         }
-        //     }
-        // }
-
-        for(int i=0; i<matrix[0].length; i++){ // time complexity is O( matrix[0].length * log( matrix.length ) )
-
-            int start = 0;
-            int end = matrix.length-1;
-
-            while(start <= end ){
-                int mid = (start + end)/2;
-
-                if(matrix[mid][i] == key){
-                    System.out.println("key found at "+"("+mid+","+i+")");
-                }
-                if(matrix[mid][i] < key){
-                    start = mid + 1;
-                } else {
-                    end = mid - 1;
-                }
+        for(int i=0; i<matrix.length; i++) {
+            count_ones = 0;
+            for(int j=0; j<matrix[0].length; j++) {
+                // if(matrix[i][j] == 1) {
+                //     count_ones++;
+                // }
+                count_ones += matrix[i][j];
+            }
+            if(count_ones > max_ones) {
+                max_ones = count_ones;
+                row_index = i;
             }
         }
 
-        // int row = 0;
-        // int col = matrix[0].length-1;
-        // while( row <= matrix.length-1 && col >=0 ){   // time complexity is O( rows + cols)
-        //     if(key == matrix[row][col]){
-        //         System.out.println("key found at "+"("+row+","+col+")");
-        //         break;
-        //     } 
-        //     if( key > matrix[row][col]){
-        //         row++;
-        //     } else {
-        //         col--;
-        //     }
-        // }
-
-        // int row = matrix.length-1;
-        // int col = 0;
-
-        // while( col <= matrix[0].length && row >= 0){
-        //     if(matrix[row][col] == key){
-        //         System.out.println("key found at "+"("+row+","+col+")");
-        //     }
-        //     if( matrix[row][col] < key){
-        //         col++;
-        //     } else {
-        //         row--;
-        //     }
-        // }
+        System.out.println("Row with maximum number of 1s is: " + row_index + " with count: " + max_ones);
     }
 
+    public static int LowerBoundUSingBinarySearch(int arr[], int target) {
+        int start = 0;
+        int end = arr.length - 1;
+        int LP = arr.length; // Default answer if target is not found
+
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+
+            if(arr[mid] >= target) {
+                LP = mid;
+                end = mid - 1; // continue searching in the left half
+            }  else {
+                start = mid + 1;
+            }
+        }
+
+        // System.out.println("Lower bound index of " + target + " is: " + LP);
+
+        return LP;
+    }
+
+    public static void RowWithMaxNoOf1sInSortedArrayOptimized(int matrix[][]) {   // time complexity is O( rows * log(cols) )
+
+        int row_index = 0;
+        int max_ones = 0;
+
+        for(int i=0; i<matrix.length; i++) {
+
+            int LP = LowerBoundUSingBinarySearch(matrix[i], 1);
+            int count_ones = matrix[i].length - LP;
+
+            if (count_ones > max_ones) {
+                max_ones = count_ones;
+                row_index = i;                
+            }
+            
+        }
+
+        System.out.println("Row with maximum number of 1s is: " + row_index + " with count: " + max_ones);
+    }
+
+    public static void searching_in_sorted_matrix(int matrix[][], int target){  // time complexity is O(rows * cols)
+
+        for(int i=0; i<matrix[0].length; i++){
+            for(int j=0; j<matrix.length; j++){
+                if(matrix[i][j] == target){
+                    System.out.println("key found at (" + i + "," + j + ")");
+                }
+            }
+        }        
+    }
+
+    public static void SearchingInSortedMatrix(int matrix[][], int target) {  // time complexity is O(rows * log(cols))
+        
+        for(int i=0; i<matrix.length; i++){
+
+            if(matrix[i][0] <= target && matrix[i][matrix[i].length - 1] >= target) {
+                int index = LowerBoundUSingBinarySearch(matrix[i], target);
+                System.out.println("Key " + target + " found at (" + i + "," + index + ")");
+            }
+        }
+    }
+
+    public static void SearchingInSortedMatrixOptimized(int matrix[][], int target) {  // time complexity is O(log(rows * cols))
+
+        int start = 0;
+        int end = matrix.length * matrix[0].length - 1;
+
+        while (start <= end) {
+            
+            int mid = (start + end) / 2;
+            int row = mid / matrix[0].length;  // Calculate the row index
+            int col = mid % matrix[0].length;   // Calculate the column index
+
+            if(matrix[row][col] == target) {
+                System.out.println("Key " + target + " found at (" + row + "," + col + ")");
+                return;
+            } else if (matrix[row][col] < target) {
+                start = mid + 1; // Move to the right half
+            } else {
+                end = mid - 1; // Move to the left half
+            }
+        }
+
+    }
 
     public static void main(String[] args) {
         // int matrix[][] = new int[3][3];
@@ -182,13 +229,32 @@ public class Arrays_2D {
         // searching(matrix,8);
         // largest_samllest_element(matrix);
 
-        int matrix[][] = {  {1,2,3,4},
-                            {5,6,7,8},
-                            {9,10,11,12},
-                            {13,14,15,16}  };
+        // int matrix[][] = {  {1,2,3,4},
+        //                     {5,6,7,8},
+        //                     {9,10,11,12},
+        //                     {13,14,15,16}  };
                     
         // SpiralMatrix(matrix);
         // DiagonalSum(matrix);
-        // searching_in_sorted_matrix(matrix);
+        
+        // Row with maximum number of 1s in sorted array
+        // int matrix[][] = {  {0,0,1,1},
+        //                     {0,1,1,1},
+        //                     {1,1,1,1},
+        //                     {0,0,0,0}  };
+        // RowWithMaxNoOf1sInSortedArray(matrix);
+        // RowWithMaxNoOf1sInSortedArrayOptimized(matrix);
+        
+        // Searching in sorted matrix
+        // int matrix[][] = {  {1,2,3,4},
+        //                     {5,6,7,8},
+        //                     {9,10,11,12},
+        //                     {13,14,15,16}  };
+        // int target = 7;
+        // searching_in_sorted_matrix(matrix, target);
+        // SearchingInSortedMatrix(matrix, target);
+        // SearchingInSortedMatrixOptimized(matrix, target);
+    
+    
     }
 }
