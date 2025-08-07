@@ -195,6 +195,10 @@ public class Arrays_2D {
 
             if(matrix[i][0] <= target && matrix[i][matrix[i].length - 1] >= target) {
                 int index = LowerBoundUSingBinarySearch(matrix[i], target);
+                // if (index < matrix[i].length && matrix[i][index] == target) {   // in case of 1st element is of each row is not neccessary greate then the last element of the privous row
+                    
+                //     System.out.println("Key " + target + " found at (" + i + "," + index + ")");
+                // }
                 System.out.println("Key " + target + " found at (" + i + "," + index + ")");
             }
         }
@@ -223,6 +227,23 @@ public class Arrays_2D {
 
     }
 
+    public static void SearchingInSortedMatrixOptimized2(int matrix[][], int target){
+        int row = 0;
+        int col = matrix[0].length - 1; // Start from the top-right corner
+
+        while (row < matrix.length && col >= 0) {
+            if (matrix[row][col] == target) {
+                System.out.println("Key " + target + " found at (" + row + "," + col + ")");
+                return;
+            } else if (matrix[row][col] > target) {
+                col--; // Move left
+            } else {
+                row++; // Move down
+            }
+        }
+
+        System.out.println("Key " + target + " not found in the matrix.");
+    }
     public static void main(String[] args) {
         // int matrix[][] = new int[3][3];
         // matrix(matrix);
@@ -246,15 +267,22 @@ public class Arrays_2D {
         // RowWithMaxNoOf1sInSortedArrayOptimized(matrix);
         
         // Searching in sorted matrix
-        // int matrix[][] = {  {1,2,3,4},
+        // int matrix[][] = {  {1,2,3,4},             // Increasing order
         //                     {5,6,7,8},
         //                     {9,10,11,12},
         //                     {13,14,15,16}  };
+        // int matrix2[][] = { {1,4,7,11,15},        // Increasing but rows and columns wise
+        //                    {2,5,8,12,19},
+        //                    {3,6,9,16,22},
+        //                    {10,13,14,17,24},
+        //                    {18,21,23,26,30} };
         // int target = 7;
         // searching_in_sorted_matrix(matrix, target);
         // SearchingInSortedMatrix(matrix, target);
         // SearchingInSortedMatrixOptimized(matrix, target);
+        // SearchingInSortedMatrixOptimized2(matrix2, target);
     
+        // 
     
     }
 }
